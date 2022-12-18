@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 //import avaliacao.No;
 
@@ -8,6 +9,9 @@ import java.util.Scanner;
 
 
 class agenda{
+	
+	
+
 	public String Nome;
 	public int[] Telefone;
 	public String Email;
@@ -68,6 +72,14 @@ class agenda{
 //	}
 	
 	
+	public String transformarTelefone_em_String() {
+		return IntStream.of(Telefone).mapToObj(String::valueOf).reduce("", String::concat);
+	}
+	
+	public String toString() {
+		
+			return " Nome: "+this.Nome+" Email: "+Email+" Endereço: "+Endereco+" Rede Social: "+this.Rede_Social+" Chave da agenda: "+this.Chave;
+		}
 	
 	public agenda(String Nome,int[] Telefone,String Email, String Endereco,String Rede_Social, int Chave) {
 		this.setNome(Nome);
@@ -78,9 +90,9 @@ class agenda{
 		this.setRede_Social(Rede_Social);
 	}
 	
-	public void listarElementoAgenda() {
-		 System.out.print("\n Nome:"+Nome+"Endereço: "+Endereco+"Email: "+Email+"Rede Social: "+Rede_Social+"Telefone(s):"+Telefone);
-	}
+//	public void listarElementoAgenda() {
+//		 System.out.print("\n Nome:"+Nome+"Endereço: "+Endereco+"Email: "+Email+"Rede Social: "+Rede_Social+"Telefone(s):"+Telefone);
+//	}
 
 }
 
@@ -238,7 +250,25 @@ class Arvore{
 		  }
 	  
 	  
-	  
+	 
+//	  public boolean equals(Object obj) {  
+//		     if (this == obj)  // se as referências forem iguais, é true
+//		             return true;  
+//		     if (obj == null)  // this é sempre diferente de null - esse cheque é feito para evitar um NullPointerException abaixo
+//		             return false;  
+//		     if (getClass() != obj.getClass())  // se não forem exatamente da mesma classe, são diferentes
+//		             return false;  
+//		     agenda other = (agenda) obj;  // fazemos o cast
+//		     if (getIdIdioma() == null) {  // comparamos por idIdioma. Se ambos forem null, então são pela sua convenção iguais.
+//		             if (other.getIdIdioma() != null)  
+//		                     return false;  
+//		     } else if (!idIdioma.equals(other.idIdioma))  // comparamos por idIdioma, usando o equals de idIdioma
+//		             return false;  
+//		   
+//		   
+//		     return true;  
+//		 } 
+//	  
 	  
 	  
 	  public void inOrder(No atual) {
@@ -257,21 +287,21 @@ class Arvore{
 		    }
 		  }
 		  
-		  public void posOrder(No atual) {
-		    if (atual != null) {
-		      posOrder(atual.esquerdo);
-		      posOrder(atual.direito);
-		      System.out.print(atual.esquerdo + " ");
-		    }
-		  }  
+//		  public void posOrder(No atual) {
+//		    if (atual != null) {
+//		      posOrder(atual.esquerdo);
+//		      posOrder(atual.direito);
+//		      System.out.print(atual.esquerdo + " ");
+//		    }
+//		  }  
 		  
 		  
 		  
 		  public void caminhar() {
 			    System.out.print("\n Exibindo em ordem: ");
 			    inOrder(raiz);
-			    System.out.print("\n Exibindo em pos-ordem: ");
-			    posOrder(raiz);
+//			    System.out.print("\n Exibindo em pos-ordem: ");
+//			    posOrder(raiz);
 			    System.out.print("\n Exibindo em pre-ordem: ");
 			    preOrder(raiz);
 			    System.out.print("\n Altura da arvore: " + altura(raiz));
@@ -284,6 +314,7 @@ class Arvore{
 			  }
 		  
 		  public int altura(No atual) {
+
 			     if(atual == null || (atual.esquerdo == null && atual.direito == null))
 			       return 0;
 			     else {
@@ -295,6 +326,8 @@ class Arvore{
 			  }
 		  
 		  
+		  
+		 
 		  
 		  public No min() {
 			    No atual = raiz;
@@ -336,13 +369,22 @@ class Agendaapp{
 		int x;
 		int y;
 		No vi = null;
+		
+		//=========================================*Telefone-exibição-instância*===================================================================//
 		int incrementar_telefone;
-		//int classe_chave;
+		String[] guardar_classe_exibicao = new String[200];//Para guardar os elementos para posterior exibição
+		int contador_array_exibicao = 0;
+		int[] guardar_chaves = new int[200];
+		//int array_indice_telefone = 0;
+		//int[] guardar_telefones_elemento = new int[11];
+		//int[] guardar_telefones_array = new int[200];
+		//int contador_guardar_telefones_elemento = 0;
+		
 		///////////////////////////////////////////
 		
 		////////////////////////////*interface de opções*//////////////////////////////////////////////////////////////////////////////////
 		do {
-			System.out.println("Nesta agenda, o método de busca é pelo Número que você cadastrou como chave");
+			System.out.println("\nNesta agenda, o método de busca é pelo Número que você cadastrou como chave");
 	        System.out.print("\n***********************************");
 	        System.out.print("\nEntre com a opcao:");
 		System.out.print("\n ----1: Inserir agenda");
@@ -356,7 +398,7 @@ class Agendaapp{
 		System.out.print("\n***********************************");
 		System.out.print("\n-> ");
 		opcao = sc.nextInt();
-		int contador = 1;//para evitar que a mesma chave seja adicionada em duas classes
+		//int contador = 1;//para evitar que a mesma chave seja adicionada em duas classes
 		
 		
 		switch(opcao) {
@@ -369,11 +411,13 @@ class Agendaapp{
 	 		//É preciso criar a agenda antes de tudo
 	 		//Criação da chave: 
 	 		System.out.println("\n Vamos adicionar um número que funcionará como chave.");
+	 		System.out.println("OBS: Um número de telefone possui 9 números");
 	 		System.out.println("Digite o número de telefone principal:");
 	 		chave = sc.nextInt();
 	 		
 	 			do {
 	 				System.out.println("Caso você deseja adicionar mais um telefone digite 1");
+	 				System.out.println("OBS: Um número de telefone possui 9 números");
 	 				System.out.println("Caso deseje encerrar o programa, digite 2");
 	 				incrementar_telefone = sc.nextInt();
 	 			
@@ -387,21 +431,23 @@ class Agendaapp{
 	 						
 	 							System.out.println("A agenda está limitada a 10 números:");//decidi limitar o tamanho do array
 	 							System.out.println("Caso tenha concluido a inserção de telefones, digite 2: ");
-	 							if(Telefone.length>10) {
+	 							
 	 						
 	 								Telefone[array_indice_telefone] = sc.nextInt();//adicionando o telefone ao array
+//	 								guardar_telefones_elemento[contador_guardar_telefones_elemento]=Telefone[array_indice_telefone];
+//	 								contador_guardar_telefones_elemento++;
+ 								array_indice_telefone++;
+	 								break;
 	 								
-	 								}else {break;}
+	 							}
 	 					
-	 							}//fechamento do case 1
-	 					
-	 						//===========================*encerrar a insção da agenda====================================//
+	 						//===========================*encerrar a inserção da agenda====================================//
 	 						case 2:{
 	 							break;
-	 								}//fechamento do case 2
-	 				
-	 							}//fechamento do switch inserido no Do-while-telefone
-	 				}while(incrementar_telefone!=2);//fechamento do Do do case 1
+	 								}
+	 						
+	 							}
+	 				}while(incrementar_telefone!=2);
 	 		
 	 		
 	 		if(Telefone.length==0) { //Caso não houer nenhum telefone
@@ -418,17 +464,26 @@ class Agendaapp{
 	 		
 	 		
 	 		
-	 		agenda classe_chave = new agenda(Nome,Telefone,Email,Endereco,Rede_Social,chave);
+	 		agenda classe_chave = new agenda(Nome,Telefone,Email,Endereco,Rede_Social,chave);//Eu criei a classe para  o caso do programador querer consultar depois
+	 		classe_chave.Telefone = Telefone;
 	 		System.out.println("Criada a agenda"+classe_chave);//debug
 	 		System.out.print(classe_chave.getClass());//DEBUG
+	 		
+	 		//
+	 		//guardar_classe_exibicao[contador_array_exibicao ] = {" Nome: "+Nome+" Telefone: "+telefone_string+" Email: "+" Endereço: "+Endereco+" Rede Social: "+Rede_Social+" Chave: "+Chave};
+	 		guardar_classe_exibicao[contador_array_exibicao ] = classe_chave.toString();
+	 		guardar_chaves[contador_array_exibicao ] = chave;
+	 		//System.out.println(classe_chave.toString());
+	 		// String resposta = IntStream.of(Telefone).mapToObj(String::valueOf).reduce("", String::concat);
 	 			
-	 		   //System.out.print("\n Informe o valor (long) -> ");
-		       //x = sc.nextInt();
+	 		   
+		       
 		       arv.inserir(chave);
-		       contador ++;
+		       //contador ++;
+		       contador_array_exibicao ++;
 		       break;
 		}
-	 		//fechamento do primeiro case
+	 		
 		
 	 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 	
@@ -466,11 +521,25 @@ class Agendaapp{
 		
 		//==================================================*BUSCAR*=========================================================//
 		case 5: {
+			int i;
+			
 		       System.out.print("\n Informe o valor (long) -> ");
                        x = sc.nextInt();
-	      	       if( arv.buscar(x) != null )
-		          System.out.print("\n Valor Encontrado");
-		       else 
+	      	       if( arv.buscar(x) != null ) {
+	      	    	   for(i=0;i<=guardar_chaves.length;i++) {
+	      	    		   if(guardar_chaves[i]==x) {
+	      	    			  
+	      	    			 System.out.print("\n Valor Encontrado!");
+	      	    			 System.out.println("\n"+guardar_classe_exibicao[i]);
+//	      	    			 for(j=0;j<=Telefone.length;j++) {
+//	      	    				 System.out.println(Telefone[j]);  Há um problema na Exibição da lista de telefones
+//	      	    			 }
+//	      	    			 break;
+	      	    		   }
+	      	    	   }}
+//		          System.out.print("\n Valor Encontrado");
+//	      	     System.out.println(guardar_classe_exibicao[0]);}
+	      	     else
 		          System.out.print("\n Valor nao encontrado!");
 		       break;
 		}	
@@ -484,10 +553,10 @@ class Agendaapp{
 		}
 		
 		
-        }} while(opcao != 6);//fechamento do 1° Do
-	    sc.close();// fim switch
+        }} while(opcao != 6);
+	    sc.close();
 		
-	}}//fechamento da classe de execução
+	}}
 		
 		
 			
