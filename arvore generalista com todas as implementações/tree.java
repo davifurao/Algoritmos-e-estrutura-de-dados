@@ -302,7 +302,7 @@ class ArvoreBinariaApp {
 				if( arv.buscar(x) != null  )
 					vi = arv.buscar(x) ;
 				    vi.item=y;
-				
+            break;
 					
 					
 				
