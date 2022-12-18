@@ -238,6 +238,9 @@ class Arvore{
 		  }
 	  
 	  
+	  
+	  
+	  
 	  public void inOrder(No atual) {
 		    if (atual != null) {
 		      inOrder(atual.esquerdo);
@@ -455,7 +458,7 @@ class Agendaapp{
 				vi = arv.buscar(x) ;
 			    vi.chave=y;
 			
-				
+				break;
 				
 			
 		}
@@ -486,10 +489,10 @@ class Agendaapp{
 		
 	}}//fechamento da classe de execução
 		
-		//-------------------------------------**FIM DOS CASE-SWITCH**---------------------------------------------------------------//
+		
 			
 		
 		
-		//fechamento da classe agenda
+		
 
 
