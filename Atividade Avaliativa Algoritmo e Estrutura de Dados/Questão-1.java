@@ -1,9 +1,6 @@
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
-//import avaliacao.No;
-
-//import java.util.*;
 
 //import avaliacao.No;
 
@@ -66,17 +63,13 @@ class agenda{
 	public void setRede_Social(String Rede_Social) {
 		this.Rede_Social = Rede_Social;
 	}
-//	public int criarChave(int[]Telefone) {
-//		 return this.Chave = Telefone[1];
-//		
-//	}
-	
+
 	
 	public String transformarTelefone_em_String() {
 		return IntStream.of(Telefone).mapToObj(String::valueOf).reduce("", String::concat);
 	}
 	
-	//teste= Listar_array_telefone(int[] Telefone);
+	
 	public String toString() {
 		
 			return " Nome: "+this.Nome+" Email: "+Email+" Endereço: "+Endereco+" Rede Social: "+this.Rede_Social+" Chave da agenda: "+this.Chave;
@@ -87,28 +80,22 @@ class agenda{
 		this.setEmail(Email);
 		this.setEndereco(Endereco);
 		this.setTelefone(Telefone);
-		this.setChave(Chave);//se houver um erro é só apagar o get/set e mudar para public a chave.
+		this.setChave(Chave);
 		this.setRede_Social(Rede_Social);
 	}
 
 	
 	
-	public void Listar_array_telefone(Object telefone2) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	
-//	public void listarElementoAgenda() {
-//		 System.out.print("\n Nome:"+Nome+"Endereço: "+Endereco+"Email: "+Email+"Rede Social: "+Rede_Social+"Telefone(s):"+Telefone);
-//	}
+	
+
 
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class No  {
-	public int chave;
+	public long chave;
 	public No direito;
 	public No esquerdo;
 }
@@ -121,7 +108,7 @@ class Arvore{
 	
 	
 	//---------------------------------*INSERIR*-------------------------------------------------------------------//
-	public void inserir(int v) {
+	public void inserir(long v) {
 	    No novo = new No(); // cria um novo Nó
 	    novo.chave = v; // atribui o valor recebido ao item de dados do Nó
 	    novo.direito = null;
@@ -155,7 +142,7 @@ class Arvore{
 	
 	
 	//----------------------*REMOVER*----------------------------------------------------------//
-	public boolean remover(int item_remover) {
+	public boolean remover(long item_remover) {
 	    if (raiz == null) return false; // se arvore vazia
 
 	    No atual = raiz;
@@ -177,10 +164,10 @@ class Arvore{
 	    } // fim laço while de busca do valor
 
 	    // **************************************************************
-	    // se chegou aqui quer dizer que encontrou o valor (v)
-	    // "atual": contem a referencia ao No a ser eliminado
-	    // "pai": contem a referencia para o pai do No a ser eliminado
-	    // "filho_esq": é verdadeiro se atual é filho a esquerda do pai
+	    // Caso a função tenha chegado nesse ponto, significa que a mesma encontrou o valor (v)
+	    // "atual": Contém a referencia ao No a ser eliminado
+	    // "pai": Contém a referencia para o pai do No a ser eliminado
+	    // "filho_esq": É verdadeiro se atual é filho a esquerda do pai
 	    // **************************************************************
 
 	    // Se nao possui nenhum filho (é uma folha), elimine-o
@@ -246,7 +233,7 @@ class Arvore{
 	  }
 	  
 	  
-	//------------------------------------*BUSCAR*------------------------------------------------------  
+	//------------------------------------*BUSCAR*-----------------------------------------------------------//
 	  public No buscar(long chave) {
 		    if (raiz == null) return null; // se arvore vazia
 		    No atual = raiz;  // começa a procurar desde raiz
@@ -260,25 +247,6 @@ class Arvore{
 	  
 	  
 	 
-//	  public boolean equals(Object obj) {  
-//		     if (this == obj)  // se as referências forem iguais, é true
-//		             return true;  
-//		     if (obj == null)  // this é sempre diferente de null - esse cheque é feito para evitar um NullPointerException abaixo
-//		             return false;  
-//		     if (getClass() != obj.getClass())  // se não forem exatamente da mesma classe, são diferentes
-//		             return false;  
-//		     agenda other = (agenda) obj;  // fazemos o cast
-//		     if (getIdIdioma() == null) {  // comparamos por idIdioma. Se ambos forem null, então são pela sua convenção iguais.
-//		             if (other.getIdIdioma() != null)  
-//		                     return false;  
-//		     } else if (!idIdioma.equals(other.idIdioma))  // comparamos por idIdioma, usando o equals de idIdioma
-//		             return false;  
-//		   
-//		   
-//		     return true;  
-//		 } 
-//	  
-	  
 	  
 	  public void inOrder(No atual) {
 		    if (atual != null) {
@@ -375,35 +343,30 @@ class Agendaapp{
 		String Rede_Social;
 		int opcao;
 		int chave;
-		int x;
-		int y;
+		long x;
+		long y;
 		No vi = null;
 		
 		//=========================================*Telefone-exibição-instância*===================================================================//
 		int incrementar_telefone;
 		String[] guardar_classe_exibicao = new String[200];//Para guardar os elementos para posterior exibição
 		int contador_array_exibicao = 0;
-		int[] guardar_chaves = new int[200];
-		//int array_indice_telefone = 0;
-		//int[] guardar_telefones_elemento = new int[11];
-		//int[] guardar_telefones_array = new int[200];
-		//int contador_guardar_telefones_elemento = 0;
+		long[] guardar_chaves = new long[200];
+		
 		
 		///////////////////////////////////////////
 		
 		////////////////////////////*interface de opções*//////////////////////////////////////////////////////////////////////////////////
 		do {
-			System.out.println("\nNesta agenda, o método de busca é pelo Número que você cadastrou como chave");
+			System.out.println("\n\nNesta agenda, o método de busca é pelo Número que você cadastrou como chave");
 	        System.out.print("\n***********************************");
 	        System.out.print("\nEntre com a opcao:");
 		System.out.print("\n ----1: Inserir agenda");
 		System.out.print("\n ----2: Excluir");
 		System.out.print("\n ----3: Alterar");
-		//System.out.print("\n ----5: Pesquisar");
 		System.out.print("\n ----4: Exibir");
 		System.out.print("\n ----5: Pesquisar");
 		System.out.print("\n ----6: Sair do programa");
-		//System.out.print("\n ----5: Alterar");
 		System.out.print("\n***********************************");
 		System.out.print("\n-> ");
 		opcao = sc.nextInt();
@@ -443,8 +406,6 @@ class Agendaapp{
 	 							
 	 						
 	 								Telefone[array_indice_telefone] = sc.nextInt();//adicionando o telefone ao array
-//	 								guardar_telefones_elemento[contador_guardar_telefones_elemento]=Telefone[array_indice_telefone];
-//	 								contador_guardar_telefones_elemento++;
  								array_indice_telefone++;
 	 								break;
 	 								
@@ -475,21 +436,19 @@ class Agendaapp{
 	 		
 	 		agenda classe_chave = new agenda(Nome,Telefone,Email,Endereco,Rede_Social,chave);//Eu criei a classe para  o caso do programador querer consultar depois
 	 		classe_chave.Telefone = Telefone;
-	 		System.out.println("Criada a agenda"+classe_chave);//debug
-	 		System.out.print(classe_chave.getClass());//DEBUG
-	 		//classe_chave.Listar_array_telefone(int[] Telefone);
+	 	
+	 		System.err.println("Criada a agenda: "+classe_chave);//debug Com a cor vermelha para Mostrar na tela
+	 		//System.out.print("Criada a: "+classe_chave.getClass());//DEBUG
 	 		
-	 		//
-	 		//guardar_classe_exibicao[contador_array_exibicao ] = {" Nome: "+Nome+" Telefone: "+telefone_string+" Email: "+" Endereço: "+Endereco+" Rede Social: "+Rede_Social+" Chave: "+Chave};
+	 		
 	 		guardar_classe_exibicao[contador_array_exibicao ] = classe_chave.toString();
 	 		guardar_chaves[contador_array_exibicao ] = chave;
-	 		//System.out.println(classe_chave.toString());
-	 		// String resposta = IntStream.of(Telefone).mapToObj(String::valueOf).reduce("", String::concat);
+	 		
 	 			
 	 		   
 		       
 		       arv.inserir(chave);
-		       //contador ++;
+		       
 		       contador_array_exibicao ++;
 		       break;
 		}
@@ -539,14 +498,14 @@ class Agendaapp{
 	      	    	   for(i=0;i<=guardar_chaves.length;i++) {
 	      	    		   if(guardar_chaves[i]==x) {
 	      	    			  
-	      	    			 System.out.print("\n Valor Encontrado!");
-	      	    			 System.out.println("\n"+guardar_classe_exibicao[i]);
+	      	    			 System.err.print("\n Valor Encontrado!");
+	      	    			 System.err.println("\n"+"["+guardar_classe_exibicao[i]+"]");//A saída é em vermelho. Um front-end no algoritmo hehe
 	      	    			 	break;
 	      	    		   }
 	      	    	   }}
-
+	      	       	//PS: O telefone está cadastrado na classe mas eu Tive dificuldades em transformar numa sring legível(Em alguns testes, a mesma imprimia tudo junto, além do espaço livre alocado no array)
 	      	     else
-		          System.out.print("\n Valor nao encontrado!");
+		          System.err.print("\n Valor nao encontrado!");
 		       break;
 		}	
 		
@@ -563,11 +522,14 @@ class Agendaapp{
 	    sc.close();
 		
 	}}
-		
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 		
 			
+    //=========================================*END/FIM*=============================================================//
 		
 		
-		
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 
 
