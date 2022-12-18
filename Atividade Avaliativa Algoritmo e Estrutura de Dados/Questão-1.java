@@ -76,6 +76,7 @@ class agenda{
 		return IntStream.of(Telefone).mapToObj(String::valueOf).reduce("", String::concat);
 	}
 	
+	//teste= Listar_array_telefone(int[] Telefone);
 	public String toString() {
 		
 			return " Nome: "+this.Nome+" Email: "+Email+" Endereço: "+Endereco+" Rede Social: "+this.Rede_Social+" Chave da agenda: "+this.Chave;
@@ -89,6 +90,14 @@ class agenda{
 		this.setChave(Chave);//se houver um erro é só apagar o get/set e mudar para public a chave.
 		this.setRede_Social(Rede_Social);
 	}
+
+	
+	
+	public void Listar_array_telefone(Object telefone2) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 //	public void listarElementoAgenda() {
 //		 System.out.print("\n Nome:"+Nome+"Endereço: "+Endereco+"Email: "+Email+"Rede Social: "+Rede_Social+"Telefone(s):"+Telefone);
@@ -468,6 +477,7 @@ class Agendaapp{
 	 		classe_chave.Telefone = Telefone;
 	 		System.out.println("Criada a agenda"+classe_chave);//debug
 	 		System.out.print(classe_chave.getClass());//DEBUG
+	 		//classe_chave.Listar_array_telefone(int[] Telefone);
 	 		
 	 		//
 	 		//guardar_classe_exibicao[contador_array_exibicao ] = {" Nome: "+Nome+" Telefone: "+telefone_string+" Email: "+" Endereço: "+Endereco+" Rede Social: "+Rede_Social+" Chave: "+Chave};
@@ -531,14 +541,10 @@ class Agendaapp{
 	      	    			  
 	      	    			 System.out.print("\n Valor Encontrado!");
 	      	    			 System.out.println("\n"+guardar_classe_exibicao[i]);
-//	      	    			 for(j=0;j<=Telefone.length;j++) {
-//	      	    				 System.out.println(Telefone[j]);  Há um problema na Exibição da lista de telefones
-//	      	    			 }
-//	      	    			 break;
+	      	    			 	break;
 	      	    		   }
 	      	    	   }}
-//		          System.out.print("\n Valor Encontrado");
-//	      	     System.out.println(guardar_classe_exibicao[0]);}
+
 	      	     else
 		          System.out.print("\n Valor nao encontrado!");
 		       break;
